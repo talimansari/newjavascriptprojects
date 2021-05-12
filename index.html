@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Javascript Training</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+  body {
+    font-family: 'Lato', sans-serif;
+  }
+
+  textarea {
+    width: 100%;
+    display: block;
+    border: 0;
+  }
+
+  .tooltipnew {
+    position: relative;
+    display: inline-block;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 5px;
+  }
+
+  li i {
+    cursor: pointer;
+  }
+
+  i#edit {
+    font-size: 1.6rem;
+    color: green;
+  }
+
+  i#delete {
+    font-size: 1.6rem;
+    color: red;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .card-height {
+    object-fit: cover;
+    height: 250px;
+  }
+
+  .tooltipnew .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tooltipnew .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  .tooltipnew:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>
+
+<body>
+  <div class="container pt-5">
+    <button class="btn btn-success mb-2" id="add">ADD NOTES</button>
+    <div class="row mb-5" id="row">
+    </div>
+    <input type="text" id="writeItem" placeholder="write Something">
+    <select name="" id="selectItem" onchange="handlechange()">
+      <option value="">select item</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <p class="main mb-5"></p>
+
+    <div>
+      <input type="text" value="Hello World" id="myInput" disabled="disabled">
+      <div class="tooltipnew">
+        <button onclick="myFunction()">
+          <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>Copy text</button>
+      </div>
+    </div>
+    <div class="mt-5">
+      <p class="kb-source"><span id="sc">
+          hello talim
+        </span></p>
+      <a class="butt butt-blue" href="#" onclick="CopyToClipboard('sc');return false;">Copy Code to Clipboard</a>
+    </div>
+
+  </div>
+  <!-- timing based Event -->
+  <div class="container mt-5">
+    <h1 id="count"></h1>
+    <button id="startbtn">Start</button>
+    <button id="stopbtn">Stop</button>
+  </div>
+  <!-- bubble-phase--captur-phase -->
+  <div class="container mt-5">
+    <div class="border p-5" id="parent">
+      <div class="border p-5" id="child"></div>
+    </div>
+  </div>
+
+  <!-- FILTER MENUS -->
+  <div class="container mt-5">
+    <h2 class="text-center">OUR MENUS</h2>
+    <hr>
+    <ul class="nav nav-tabs  justify-content-center">
+      <li><a class="btn-success btn fil-btn" data-id="all">All</a></li>
+      <li><a class="btn-danger btn fil-btn" data-id="breakfast">Breakfast</a></li>
+      <li><a class="btn-primary btn fil-btn" data-id="lunch">Lunch</a></li>
+      <li><a class="btn-warning btn fil-btn" data-id="dinner">Dinner</a></li>
+    </ul>
+    <div class="row mt-3 item-section">
+
+    </div>
+  </div>
+  <!-- tabs-project -->
+  <div class="container">
+    <h2 class="text-center">Tab Project</h2>
+    <ul class="nav nav-tabs  justify-content-center">
+      <li><a class="btn-danger btn tab-btn active" data-id="history">History</a></li>
+      <li><a class="btn-primary btn tab-btn" data-id="vision">Vision</a></li>
+      <li><a class="btn-warning btn tab-btn" data-id="goals">Goals</a></li>
+    </ul>
+    <article style="margin:0 auto;max-width: 600px;">
+      <p class="content active" id="history">(History) Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        Vitae dolore dolorum eius ut esse cum veritatis vero porro mollitia enim pariatur modi
+        laborum ipsam doloremque error beatae,
+        numquam quibusdam iusto?</p>
+      <p class="content" id="vision">(Vision) Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        Vitae dolore dolorum eius ut esse cum veritatis vero porro mollitia enim pariatur modi
+        laborum ipsam doloremque error beatae,
+        numquam quibusdam iusto?</p>
+      <p class="content" id="goals">(Goals) Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        Vitae dolore dolorum eius ut esse cum veritatis vero porro mollitia enim pariatur modi
+        laborum ipsam doloremque error beatae,
+        numquam quibusdam iusto?</p>
+    </article>
+  </div>
+  <!-- Timer Project Section-->
+  <div class="container mt-5 text-center">
+    <h2>Lorem Project</h2>
+    <form class="form-inline form-section">
+      <div class="form-group mb-2">
+        <label for="amount" class="form-control">Paragraph</label>
+        <input type="number" class="form-control" id="amount" placeholder="3">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2 ml-2 generate-btn">GENERATE</button>
+    </form>
+    <div class="gen-result"></div>
+  </div>
+  <!-- Crud Project -->
+  <div class="container my-5 text-center">
+    <section class="crud-center">
+      <p class="alert"></p>
+      <h1>CRUD OPRATOR</h1>
+      <form action="" class="crud-form">
+        <div class="form-wrap">
+          <input type="text" name="" id="crud-input" placeholder="ADD ITEM" />
+          <button class="Submit-btn" type="submit">submit</button>
+        </div>
+      </form>
+      <!-- list -->
+      <div class="crud-container">
+        <div class="crud-list">
+
+        </div>
+        <button type="button" class="clear-btn">Clear All</button>
+      </div>
+    </section>
+    <!-- Slider-project -->
+    <div class="container my-5">
+      <div class="slider-container">
+        <div class="slides">
+          <img src="./image/breakfast-img/breakfast1.jpg" class="slide-img" alt="">
+          <h3>1</h3>
+        </div>
+        <div class="slides">
+          <img src="./image/breakfast-img/breakfast2.jpg" class="slide-img" alt="">
+          <h3>2</h3>
+        </div>
+        <div class="slides">
+          <img src="./image/breakfast-img/breakfast3.jpg" class="slide-img" alt="">
+          <h3>3</h3>
+        </div>
+        <div class="slides">
+          <img src="./image/breakfast-img/breakfast4.jpg" class="slide-img" alt="">
+          <h3>4</h3>
+        </div>
+      </div>
+      <div class="slider-btns mt-3">
+        <button type="button" class="prev slider-btn">
+          prev
+        </button>
+        <button type="button" class="next slider-btn">
+          next
+        </button>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="./custom.js"></script>
+
+</body>
+
+</html>
